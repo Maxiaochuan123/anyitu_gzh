@@ -13,6 +13,11 @@ const router = new Router({
       path: "/byStages",
       name: "byStages",
       component: () => import("../views/byStages.vue")
+    },
+    {  //解押引导页
+      path: "/guideUnzip",
+      name: "guideUnzip",
+      component: () => import("../views/guidePage/unzip.vue")
     }
   ]
 });
