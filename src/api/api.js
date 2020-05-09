@@ -1,5 +1,5 @@
 import { get, post } from "./interceptor";
 export default {
-  // 登陆
-  login: params => post({ params, url: "/login" }),
+  // 获取高德 3级联动数据 
+  getCityData: params => get({ params, url: "/crmTencentClew/RequestAmap" }),
 };

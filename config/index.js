@@ -17,12 +17,12 @@ module.exports = {
     assetsSubDirectory: "static",
     assetsPublicPath: "/",
     proxyTable: {
-      "/api": {
-        target: "http://192.168.0.92:8899",
+      "/crmTencentClew": {
+        target: "http://192.168.0.92:6086",
         changeOrigin: true,
-        pathRewrite: {
-          "^/api": ""
-        }
+        // pathRewrite: {
+        //   "^/crmTencentClew": ""
+        // }
       }
     },
 

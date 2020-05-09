@@ -145,15 +145,13 @@ export default {
       }
     },
     getMap() {
-      let params = {
-        key: "f0cca3e4367dbec23605783438908023",
-        subdistrict: "3"
-      };
-      axios
-        .get("https://restapi.amap.com/v3/config/district", { params: params })
-        .then(res => {
-          let { data } = res;
-          this.province_list = data.districts[0].districts;
+      // let params = {
+      //   key: "f0cca3e4367dbec23605783438908023",
+      //   subdistrict: "3"
+      // };
+      this.api.getCityData().then(res => {
+          let { districts } = res;
+          this.province_list = districts;
           this.showColor("province");
         });
     },
