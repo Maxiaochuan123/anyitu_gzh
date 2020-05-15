@@ -22,7 +22,10 @@ body{
     height: 676px;
     background-color: #F3F3F3;
     position: relative;
-
+    .banner{
+      height: 290px;
+      box-shadow: 0px -7px 20px 0px #0e0e0e;
+    }
     .header {
       .title {
         display: flex;
@@ -51,7 +54,9 @@ body{
       height: 346px;
       padding: 24px 40px;
       position: absolute;
-      bottom: 34px;
+      top: 270px;
+      // top: -30px;
+      // bottom: 30px;
       left: calc((100% - 326px) / 2);
       background-color: #fff;
       box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.27);
@@ -90,6 +95,10 @@ body{
         &:active {
           background-color: #03ab6c;
         }
+      }
+
+      .btnDisabled{
+        background-color: #d9d9d9;
       }
     }
   }

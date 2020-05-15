@@ -4,7 +4,7 @@
     <CityPicker ref="cityPicker" @getCityData="getCityData"></CityPicker>
     <div class="banner">
       <div class="block1">
-        <img src="../../static/images/banner_1.png">
+        <img class="banner" src="../../static/images/banner_1.png">
         <div class="form">
           <div class="header">
             <div class="title"><img src="../../static/images/money.png"><span>贷款申请</span></div>
@@ -12,18 +12,19 @@
             <div class="inputBox">
               <div class="basic">
                 <img src="../../static/images/name.png">
-                <mu-text-field v-model.trim="form.name" placeholder="请输入您的姓名"></mu-text-field>
+                <mu-text-field v-model.trim="form.leadsName" placeholder="请输入您的姓名"></mu-text-field>
               </div>
               <div class="basic">
                 <img src="../../static/images/phone.png">
-                <mu-text-field v-model.trim="form.phone" placeholder="请输入您的手机号"></mu-text-field>
+                <mu-text-field v-model.trim="form.mobile" placeholder="请输入您的手机号"></mu-text-field>
               </div>
               <div class="basic" @click="$refs.cityPicker.show()">
                 <img src="../../static/images/city.png">
-                <mu-text-field v-model.trim="form.city" placeholder="请选择您所在城市" disabled></mu-text-field>
+                <mu-text-field v-model.trim="form.address" placeholder="请选择您所在城市" disabled></mu-text-field>
               </div>
             </div>
-            <div class="submitBtn" @click="submit">提交申请</div>
+            <!-- <mu-button @click="cc">提交申请</mu-button> -->
+            <mu-button :class="['submitBtn', btnDisabled ? 'btnDisabled' : '']" :disabled="btnDisabled" @click="submit(4)">提交申请</mu-button>
           </div>
         </div>
       </div>
@@ -40,22 +41,21 @@ export default {
   data() {
     return {
       form:{
-        name:'',
-        phone:'',
-        city:''
-      },
-      pickerTitle:"lala",
-      pickerAnchor:[0],
-      pickerList:[{text:'张三',value:1},{text:'李四',value:2},{text:'王二',value:3}],
+        leadsName:"",
+        mobile:"",
+        leadsType:"车贷线索",
+        address:"",
+        addressCode:""
+      }
     }
   },
+  created () {
+    this.setPageTitle("车抵贷");
+  },
   methods: {
-    submit(){
-      console.log(this.form)
-    },
-
     getCityData(code, name, list){
-      this.form.city = name;
+      this.form.addressCode = code;
+      this.form.address = name;
     }
   }
 }

@@ -14,11 +14,19 @@ import MuseUI from "muse-ui";
 import "muse-ui/dist/muse-ui.css";
 Vue.use(MuseUI);
 
+import Toast from 'muse-ui-toast';
+import options from "@static/js/options";
+Vue.use(Toast);
+Toast.config(options.toast);
+
 import mixins from "@/api/mixins";
 Vue.mixin(mixins);
 
 import dayjs from "dayjs";
 Vue.prototype.dayjs = dayjs;
+
+import tool from "@static/js/tool";
+Vue.prototype.tool = tool;
 
 import storage from "@static/js/storage";
 Vue.prototype.storage = storage;

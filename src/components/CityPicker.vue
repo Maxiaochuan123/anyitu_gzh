@@ -24,37 +24,39 @@
             </span>
           </div>
         </div>
-        <div class="content">
-          <div
-            :id="'province' + index"
-            :key="index"
-            :style="{ color: i.name == province.name ? '#00C67B' : '' }"
-            @click="provinceChenge(i, index)"
-            v-for="(i, index) in province_list"
-            v-if="isColor.province"
-          >
-            {{ i.name }}
-          </div>
-          <div
-            :id="'city' + index"
-            :key="index"
-            :style="{ color: i.name == city.name ? '#00C67B' : '' }"
-            @click="cityChenge(i, index)"
-            v-for="(i, index) in city_list"
-            v-if="isColor.city"
-          >
-            {{ i.name }}
-          </div>
-          <div
-            :id="'county' + index"
-            :key="index"
-            :style="{ color: i.name == county.name ? '#00C67B' : '' }"
-            @click="countyChenge(i, index)"
-            v-for="(i, index) in county_list"
-            v-if="isColor.county"
-          >
-            {{ i.name }}
-          </div>
+        <div ref="content" class="content">
+          <template v-if="isColor.province">
+            <div
+              :id="'province' + index"
+              :key="index"
+              :style="{ color: i.name == province.name ? '#00C67B' : '' }"
+              @click="provinceChenge(i, index)"
+              v-for="(i, index) in province_list"
+            >
+              {{ i.name }}
+            </div>
+          </template>
+          <template v-if="isColor.city">
+            <div
+              :key="index"
+              :style="{ color: i.name == city.name ? '#00C67B' : '' }"
+              @click="cityChenge(i, index)"
+              v-for="(i, index) in city_list"
+            >
+              {{ i.name }}
+            </div>
+          </template>
+          <template v-if="isColor.county">
+            <div
+              :id="'county' + index"
+              :key="index"
+              :style="{ color: i.name == county.name ? '#00C67B' : '' }"
+              @click="countyChenge(i, index)"
+              v-for="(i, index) in county_list"
+            >
+              {{ i.name }}
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -105,7 +107,6 @@ export default {
     textTab(val) {
       this.showColor(val);
       this.activeAbc(this.point[val]);
-      window.scrollTo(0, 0);
     },
     showColor(val) {
       for (var i in this.isColor) {
@@ -117,20 +118,22 @@ export default {
       }
     },
     provinceChenge(row, index) {
-      this.province = row;
-      this.city_list = row.districts;
       this.county_list = [];
-      this.showColor("city");
       this.city = {};
       this.county = {};
+      this.province = row;
+      this.city_list = row.districts;
       this.point.province = "province" + index;
+      this.showColor("city");
+      this.$refs.content.scrollTop=0;
     },
     cityChenge(row, index) {
+      this.county = {};
       this.city = row;
       this.county_list = row.districts;
-      this.showColor("county");
-      this.county = {};
       this.point.city = "city" + index;
+      this.showColor("county");
+      this.$refs.content.scrollTop=0;
     },
     countyChenge(row, index) {
       this.county = row;
@@ -145,15 +148,11 @@ export default {
       }
     },
     getMap() {
-      // let params = {
-      //   key: "f0cca3e4367dbec23605783438908023",
-      //   subdistrict: "3"
-      // };
       this.api.getCityData().then(res => {
-          let { districts } = res;
-          this.province_list = districts;
-          this.showColor("province");
-        });
+        let { districts } = res.districts[0];
+        this.province_list = districts;
+        this.showColor("province");
+      });
     },
     show(){
       this.picker = true;
@@ -249,9 +248,9 @@ export default {
         line-height: 44px;
         text-align: center;
         overflow-y: scroll;
-        &::-webkit-scrollbar {
-          display: none;
-        }
+        // &::-webkit-scrollbar {
+        //   display: none;
+        // }
       }
     }
     .xh-main-b {

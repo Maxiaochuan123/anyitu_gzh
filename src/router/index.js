@@ -17,7 +17,12 @@ const router = new Router({
     {  //解押引导页
       path: "/guideUnzip",
       name: "guideUnzip",
-      component: () => import("../views/guidePage/unzip.vue")
+      component: () => import("../views/unzip.vue")
+    },
+    {  //提交成功
+      path: "/submitSuccess",
+      name: "submitSuccess",
+      component: () => import("../views/submitSuccess.vue")
     }
   ]
 });

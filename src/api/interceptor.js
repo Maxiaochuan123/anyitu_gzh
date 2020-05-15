@@ -7,8 +7,7 @@ import Qs from 'qs';
 // 超时时间
 axios.defaults.timeout = 5000;
 const loginUrl = `http://${window.location.host}/#/login`;
-const apiPrefix = `${window.location.protocol}//${window.location.host}`;
-
+const apiPrefix = `${window.location.protocol}//${window.location.host}/api`;
 /*----------------------请求拦截----------------------*/
 axios.interceptors.request.use(config => {
   const contentType = config.headers["Content-Type"];
